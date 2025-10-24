@@ -1,0 +1,879 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bangladesh Duck Disease Guide</title>
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Load Inter font -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        /* Custom scrollbar for main content */
+        .main-content-scroll::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        .main-content-scroll::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        .main-content-scroll::-webkit-scrollbar-thumb {
+            background: #a8a29e; /* stone-400 */
+            border-radius: 4px;
+        }
+        .main-content-scroll::-webkit-scrollbar-thumb:hover {
+            background: #78716c; /* stone-500 */
+        }
+        
+        /* Style for the active tab link */
+        .tab-link.active {
+            background-color: #0d9488; /* teal-600 */
+            color: #ffffff;
+            font-weight: 600;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+        }
+
+        /* Hide scrollbar for the tab navigation */
+        .disease-nav-scroll::-webkit-scrollbar {
+            display: none;
+        }
+        .disease-nav-scroll {
+            -ms-overflow-style: none;  /* IE and Edge */
+            scrollbar-width: none;  /* Firefox */
+        }
+    </style>
+</head>
+<body class="bg-stone-100">
+
+    <div class="flex flex-col h-screen overflow-hidden">
+        
+        <!-- Header -->
+        <header class="bg-teal-800 text-white shadow-lg z-20">
+            <div class="flex items-center justify-between p-4 h-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+                <div class="flex items-center space-x-3">
+                    <!-- Simple Duck Icon -->
+                    <svg class="w-10 h-10" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M20.88 14.1C20.43 12.8 19.49 11.62 18.23 10.82C18.6 10.27 18.86 9.63 18.98 8.93C19.39 6.4 18.28 3.99 16.32 2.65C13.62 0.81 9.9 1.63 8.04 4.31C7.88 4.52 7.74 4.75 7.62 4.98C7.15 4.8 6.66 4.68 6.16 4.62C3.93 4.36 1.8 5.61 0.79 7.57C-0.7 9.99 0.05 13.1 2.44 14.54C2.56 14.61 2.69 14.67 2.81 14.73C2.11 15.15 1.51 15.74 1.05 16.45C0.29 17.61 -0.05 19.05 0.01 20.49C0.16 22.84 2.13 24.16 4.29 23.49C5.35 23.16 6.22 22.48 6.78 21.58C7.2 22.08 7.74 22.47 8.35 22.72C10.51 23.57 12.97 22.86 14.53 21.1C15.91 19.56 16.44 17.5 15.92 15.54C16.92 15.82 17.91 15.83 18.84 15.57C19.7 15.32 20.46 14.78 20.88 14.1Z"/></svg>
+                    <span class="text-xl md:text-2xl font-bold hidden sm:inline">Duck Health Guide</span>
+                </div>
+                <!-- Dropdown Navigation -->
+                <div class="flex-1 max-w-xs ml-4">
+                    <select id="disease-select-nav" class="w-full h-10 px-3 py-2 text-base text-stone-800 bg-white border border-stone-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-teal-500 appearance-none">
+                        <option value="" disabled selected>Select a disease...</option>
+                        <!-- Options will be populated here by JS -->
+                    </select>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content Area -->
+        <main class="flex-1 p-4 md:p-6 overflow-y-auto main-content-scroll">
+            <div class="max-w-7xl mx-auto">
+
+                <!-- Developer Credit -->
+                <div class="mb-4 text-center text-sm text-stone-600 font-medium bg-white p-3 rounded-lg shadow-md">
+                    Developed by <strong>MD AKRAMUL HAQUE, BCS (LIVESTOCK)</strong>, DLS, BANGLADESH
+                </div>
+
+                <!-- Welcome Message -->
+                <div id="welcome-message" class="bg-white p-6 rounded-lg shadow-md border-l-4 border-teal-600">
+                    <div class="flex items-center">
+                        <svg class="w-12 h-12 text-teal-600 mr-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                        <div>
+                            <h2 class="text-2xl font-bold text-teal-800 mb-2">Welcome to the Duck Disease Guide</h2>
+                            <p class="text-stone-700 mb-3">
+                                <strong>Biosecurity is Key:</strong> The best treatment for duck diseases is prevention. Maintain a clean environment, control visitor access, provide clean feed and water, and implement a sound vaccination program based on local veterinary advice.
+                            </p>
+                            <p class="text-stone-600">
+                                Select a disease from the dropdown menu above to view detailed information.
+                            </p>
+                        </div>
+                    </div>
+                     <div class="bg-yellow-100 border-l-4 border-yellow-500 text-yellow-800 p-4 rounded-md mt-6" role="alert">
+                        <p class="font-bold">Important Disclaimer</p>
+                        <p>This information is for educational purposes only. Always consult a registered veterinarian or animal health professional for a proper diagnosis and treatment plan for your flock.</p>
+                    </div>
+                </div>
+
+                <!-- Disease Detail Container (Hidden by default) -->
+                <div id="disease-detail" class="hidden">
+                    <!-- Title -->
+                    <h2 id="disease-title" class="text-3xl font-extrabold text-teal-900 mb-6 border-b-2 border-teal-200 pb-3"></h2>
+                    
+                    <!-- Main Grid -->
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                        
+                        <!-- Clinical Signs Card -->
+                        <div class="bg-white p-6 rounded-lg shadow-lg">
+                            <div class="flex items-center mb-4">
+                                <svg class="w-8 h-8 text-teal-600 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path></svg>
+                                <h3 class="text-xl font-bold text-stone-800">Clinical Signs</h3>
+                            </div>
+                            <ul id="disease-signs" class="list-disc list-inside space-y-2 text-stone-700 pl-2">
+                                <!-- JS will populate this -->
+                            </ul>
+                        </div>
+
+                        <!-- Post-mortem Lesions Card -->
+                        <div class="bg-white p-6 rounded-lg shadow-lg">
+                             <div class="flex items-center mb-4">
+                                <svg class="w-8 h-8 text-teal-600 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 10v.01M10 7v.01M10 13v.01M13 10v.01M7 10v.01M16 10v.01"></path></svg>
+                                <h3 class="text-xl font-bold text-stone-800">Post-mortem Lesions</h3>
+                            </div>
+                            <ul id="disease-postMortem" class="list-disc list-inside space-y-2 text-stone-700 pl-2">
+                                <!-- JS will populate this -->
+                            </ul>
+                        </div>
+
+                        <!-- Prevention Card -->
+                        <div class="bg-white p-6 rounded-lg shadow-lg">
+                            <div class="flex items-center mb-4">
+                                <svg class="w-8 h-8 text-teal-600 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+                                <h3 class="text-xl font-bold text-stone-800">Prevention</h3>
+                            </div>
+                            <ul id="disease-prevention" class="list-disc list-inside space-y-2 text-stone-700 pl-2">
+                                <!-- JS will populate this -->
+                            </ul>
+                        </div>
+                        
+                        <!-- Herbal & Supportive Care Card -->
+                        <div class="bg-white p-6 rounded-lg shadow-lg">
+                            <div class="flex items-center mb-4">
+                                <!-- Using a leaf icon for herbal -->
+                                <svg class="w-8 h-8 text-teal-600 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+                                <h3 class="text-xl font-bold text-stone-800">Herbal & Supportive Care</h3>
+                            </div>
+                            <ul id="disease-herbal" class="list-disc list-inside space-y-2 text-stone-700 pl-2">
+                                <!-- JS will populate this -->
+                            </ul>
+                        </div>
+
+                        <!-- Treatment Protocol Card -->
+                        <div class="bg-white p-6 rounded-lg shadow-lg lg:col-span-2">
+                            <div class="flex items-center mb-4">
+                                <svg class="w-8 h-8 text-teal-600 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
+                                <h3 class="text-xl font-bold text-stone-800">Treatment Protocol</h3>
+                            </div>
+                            <p class="text-sm text-stone-600 mb-4">Note: Brand names are examples from Bangladesh (e.g., Renata, ACI, Eon) and are subject to availability. Always follow veterinary advice and product dosage instructions.</p>
+                            <div class="overflow-x-auto rounded-lg border border-stone-200">
+                                <table id="disease-treatment" class="min-w-full divide-y divide-stone-200">
+                                    <thead class="bg-stone-50">
+                                        <tr>
+                                            <th scope="col" class="px-6 py-3 text-left text-xs font-semibold text-stone-600 uppercase tracking-wider">
+                                                Primary / Supportive
+                                            </th>
+                                            <th scope="col" class="px-6 py-3 text-left text-xs font-semibold text-stone-600 uppercase tracking-wider">
+                                                Example Brand Name (Bangladesh)
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="bg-white divide-y divide-stone-200">
+                                        <!-- JS will populate this -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+             <!-- Footer -->
+            <footer class="bg-transparent p-4 text-center text-sm text-stone-500 mt-8">
+                <strong>Disclaimer:</strong> This is an informational guide, not veterinary advice. 
+                Always consult a qualified veterinarian for flock health.
+                Brand names are examples and do not constitute an endorsement.
+            </footer>
+        </main>
+    </div>
+
+    <script>
+        // --- DATABASE ---
+        // This is the core information for the website, based on user-provided text.
+        const diseaseData = {
+            'avian_influenza': {
+                title: 'Avian Influenza (Bird Flu)',
+                signs: [
+                    'Ducks are often asymptomatic carriers.',
+                    'In High Pathogenicity (HPAI) cases: sudden death, severe depression, sinusitis, cyanosis of the head, nervous signs (tremors, twisted neck), and a sharp drop in egg production.'
+                ],
+                postMortem: [
+                    'Highly variable. May include congestion and hemorrhages on internal organs, edema (especially head and neck), and necrosis in the liver, spleen, and kidneys.'
+                ],
+                treatment: [
+                    { generic: 'No specific antiviral (Notifiable disease)', brand: 'N/A' },
+                    { generic: 'Erythromycin combination (for secondary infection)', brand: 'Micronid Powder (Renata)' },
+                    { generic: 'Electrolytes & Vitamins (Supportive)', brand: 'Renalyte (Renata), Electromin (ACI)' }
+                ],
+                herbal: [
+                    'To boost immunity during high-risk periods, provide a water decoction of Tulsi (Holy Basil) and Kalomegh (Andrographis paniculata).',
+                    'This is not a cure but can support general health.'
+                ],
+                prevention: [
+                    'EXTREMELY strict biosecurity is the only effective measure.',
+                    'Prevent all contact with wild birds.',
+                    'Control visitor access and enforce disinfection.',
+                    'Vaccination may be an option depending on local regulations.'
+                ]
+            },
+            'duck_plague': {
+                title: 'Duck Plague (Duck Viral Enteritis - DVE)',
+                signs: [
+                    'Sudden high mortality, drop in egg production, extreme thirst, greenish-watery diarrhea, blood from vent, photophobia, drooping wings.'
+                ],
+                postMortem: [
+                    'Hemorrhages on heart, liver, spleen, and kidneys.',
+                    'Characteristic annular hemorrhagic bands in the intestines.',
+                    'Necrotic plaques in esophagus and cloaca.'
+                ],
+                treatment: [
+                    { generic: 'No specific antiviral', brand: 'N/A' },
+                    { generic: 'Erythromycin combination (Secondary infection)', brand: 'Micronid Powder (Renata)' },
+                    { generic: 'Enrofloxacin (Secondary infection)', brand: 'Enrocin (Renata), Baytril 10% (ACI)' },
+                    { generic: 'Tetracyclines (Secondary infection)', brand: 'Renamycin (Techno Drugs)' },
+                    { generic: 'Electrolytes & Vitamin K (Supportive)', brand: 'Rena-K (Renata)' }
+                ],
+                herbal: [
+                    'Provide water mixed with extracts of Neem leaves (Azadirachta indica) and Turmeric (Curcuma longa) for their natural antibacterial and anti-inflammatory properties.'
+                ],
+                prevention: [
+                    'Strict biosecurity.',
+                    'Vaccination is highly effective.',
+                    'A common schedule in Bangladesh is vaccination at 3 weeks and a booster at 8 weeks.'
+                ]
+            },
+            'duck_cholera': {
+                title: 'Duck Cholera (Pasteurellosis)',
+                signs: [
+                    'Sudden death in good-conditioned birds.',
+                    'In chronic cases: loss of appetite, greenish diarrhea, nasal discharge, lameness from swollen joints, twisted neck (torticollis).'
+                ],
+                postMortem: [
+                    'Petechial hemorrhages on heart fat and serous surfaces.',
+                    'Enlarged, congested liver with numerous small, white necrotic foci ("pinpoint white spots").'
+                ],
+                treatment: [
+                    { generic: 'Potentiated Sulfonamides', brand: 'Sultrik (Renata), Trim-Sul (ACI)' },
+                    { generic: 'Amoxicillin', brand: 'Moxacil Vet (ACI)' },
+                    { generic: 'Erythromycin combination', brand: 'Micronid Powder (Renata)' },
+                    { generic: 'Electrolytes & Multivitamins (Supportive)', brand: 'Vit-E Plus (Eon)' }
+                ],
+                herbal: [
+                    'Crushed raw Garlic (Allium sativum) mixed in the feed can act as a natural antibacterial and immune stimulant.',
+                    'A decoction of Nishinda leaves (Vitex negundo) may also be used.'
+                ],
+                prevention: [
+                    'Vaccination is recommended in endemic areas.',
+                    'Strict rodent control is crucial.',
+                    'Maintain high biosecurity.'
+                ]
+            },
+            'riemerella': {
+                title: 'Riemerellosis (Riemerella anatipestifer)',
+                signs: [
+                    'Affects young ducklings (1-8 weeks).',
+                    'Respiratory (coughing, sneezing, nasal/ocular discharge).',
+                    'Nervous (tremors, incoordination, twisted neck).',
+                    'Locomotor (swollen joints, lameness). High mortality.'
+                ],
+                postMortem: [
+                    'Fibrinous polyserositis: a yellowish-white fibrinous layer covering the heart (pericarditis), liver (perihepatitis), and air sacs (airsacculitis).',
+                    'Meningitis may also be present.'
+                ],
+                treatment: [
+                    { generic: 'Amoxicillin', brand: 'Moxacil Vet (ACI)' },
+                    { generic: 'Tetracyclines', brand: 'Renamycin (Techno Drugs)' },
+                    { generic: 'Erythromycin combinations', brand: 'Micronid Powder (Renata)' },
+                    { generic: 'Multivitamins & Electrolytes (Supportive)', brand: 'Varies' }
+                ],
+                herbal: [
+                    'Immune-boosting herbs like Tulsi and Garlic can be provided as supportive care but are not a substitute for antibiotics in an outbreak.'
+                ],
+                prevention: [
+                    'Strict biosecurity, all-in/all-out management, and sanitation.',
+                    'Bacterin vaccines are available and provide good protection.'
+                ]
+            },
+            'coccidiosis': {
+                title: 'Duck Coccidiosis',
+                signs: [
+                    'While ducks are more resistant than chickens, young ducklings under stress can show signs of bloody or watery diarrhea, lethargy, ruffled feathers, and weight loss.'
+                ],
+                postMortem: [
+                    'Inflammation and thickening of the intestinal wall, sometimes with bloody contents, particularly in the lower intestine and ceca.'
+                ],
+                treatment: [
+                    { generic: 'Toltrazuril', brand: 'Renazuril (Renata), Coccitol (ACI)' },
+                    { generic: 'Vitamin K (Supportive)', brand: 'Rena-K (Renata)' },
+                    { generic: 'Electrolytes (Supportive)', brand: 'Renalyte (Renata)' }
+                ],
+                herbal: [
+                    'Extracts from papaya seeds or bitter leaf (Vernonia amygdalina) are sometimes used traditionally for their potential anti-protozoal effects.'
+                ],
+                prevention: [
+                    'Excellent litter management is key; keep it dry at all times.',
+                    'Avoid overcrowding.',
+                    'Use a coccidiostat in starter feed during high-risk, humid seasons.'
+                ]
+            },
+            'mycoplasmosis': {
+                title: 'Mycoplasmosis',
+                signs: [
+                    'Often subclinical in ducks.',
+                    'When stressed, may show sinusitis (swollen sinuses), nasal discharge, coughing, and swollen joints/lameness (M. synoviae).'
+                ],
+                postMortem: [
+                    'Catarrhal inflammation in sinuses and trachea, thickened and cloudy air sacs (airsacculitis), and fibrinous exudate in affected joints.'
+                ],
+                treatment: [
+                    { generic: 'Tylosin', brand: 'Mycostop (Renata), Tylan (ACI)' },
+                    { generic: 'Tiamulin', brand: 'Renagard (Renata)' },
+                    { generic: 'Erythromycin combination', brand: 'Micronid Powder (Renata)' }
+                ],
+                herbal: [
+                    'Respiratory soothers like a decoction of Tulsi, Ginger, and Honey can help alleviate clinical signs but will not eliminate the infection.'
+                ],
+                prevention: [
+                    'Source ducklings only from Mycoplasma-free breeder flocks.',
+                    'Maintain strict biosecurity to prevent introduction from other poultry.'
+                ]
+            },
+            'aflatoxicosis': {
+                title: 'Aflatoxicosis',
+                signs: [
+                    'Poor growth, lethargy, reduced appetite, pale combs/beaks, incoordination, sudden death.',
+                    'Caused by toxins from moldy feed.'
+                ],
+                postMortem: [
+                    'Liver is the primary organ affected: enlarged, pale, fatty, and friable.',
+                    'Ascites (fluid in the abdominal cavity) and hemorrhages may be present.'
+                ],
+                treatment: [
+                    { generic: 'Immediately remove contaminated feed', brand: 'N/A' },
+                    { generic: 'Liver tonics (Supportive)', brand: 'HepaRen (Renata), Liva-ton (Techno Drugs), Livatone (Eon)' },
+                    { generic: 'Toxin Binder (in new feed)', brand: 'Toxy-Nil (ACI), Eonitox (Eon)' },
+                    { generic: 'Vitamin E with Selenium (Supportive)', brand: 'Varies' }
+                ],
+                herbal: [
+                    'Use of Kalomegh (Andrographis paniculata) powder in feed is traditionally believed to support liver function and aid in detoxification.'
+                ],
+                prevention: [
+                    'Source high-quality feed.',
+                    'Store feed in a dry, cool place.',
+                    'Routinely use a quality toxin binder in the feed.'
+                ]
+            },
+            'botulism': {
+                title: 'Botulism',
+                signs: [
+                    'Progressive, flaccid paralysis starting with the legs and wings, followed by paralysis of the neck ("limberneck").'
+                ],
+                postMortem: [
+                    'Often no specific gross lesions.',
+                    'Diagnosis is based on clinical signs and history of access to stagnant water or decaying organic matter.'
+                ],
+                treatment: [
+                    { generic: 'Botulinum antitoxin (Rarely available)', brand: 'N/A' },
+                    { generic: 'Flushing tract with mild laxative (e.g., Epsom salts)', brand: 'Supportive Care' }
+                ],
+                herbal: [
+                    'There is no effective herbal treatment. Focus is entirely on flushing the toxin and providing supportive care.'
+                ],
+                prevention: [
+                    'Prevent access to stagnant ponds and decaying carcasses.',
+                    'Ensure a clean environment and provide fresh water daily.'
+                ]
+            },
+            'aspergillosis': {
+                title: 'Aspergillosis',
+                signs: [
+                    'Primarily affects young ducklings.',
+                    'Gasping, rapid breathing (dyspnea), and general respiratory distress.'
+                ],
+                postMortem: [
+                    'Characteristic white to yellow-green caseous nodules or plaques found throughout the lungs and air sacs.'
+                ],
+                treatment: [
+                    { generic: 'Copper Sulfate in water', brand: 'Varies' },
+                    { generic: 'Culling severely affected birds', brand: 'Recommended' },
+                    { generic: 'Improve ventilation (Supportive)', brand: 'Immediate action' }
+                ],
+                herbal: [
+                    'Making a decoction of Tulsi (Holy Basil) and Ginger and providing it in water can help soothe the respiratory tract, but it will not cure the fungal infection.'
+                ],
+                prevention: [
+                    'This is the most critical step.',
+                    'Use only clean, dry, and completely mold-free litter material.',
+                    'Ensure feed is fresh and free of mold.'
+                ]
+            },
+            'salmonellosis': {
+                title: 'Salmonellosis',
+                signs: [
+                    'Lethargy, ruffled feathers, huddling together.',
+                    'White, greenish, or yellow watery diarrhea.',
+                    'Pasted vent (feces stuck to the vent area).',
+                    'Dehydration, weakness, and lameness.',
+                    'Nervous signs (less common).'
+                ],
+                postMortem: [
+                    'Enlarged, congested liver (may have small necrotic spots).',
+                    'Enlarged spleen.',
+                    'Unabsorbed yolk sac in young ducklings.',
+                    'Inflammation of the intestine (enteritis).',
+                    'Fibrinous casts (cheesy material) in the ceca.'
+                ],
+                treatment: [
+                    { generic: 'Amoxicillin', brand: 'Moxacil Vet (ACI)' },
+                    { generic: 'Enrofloxacin', brand: 'Enrocin (Renata), Baytril 10% (ACI)' },
+                    { generic: 'Potentiated Sulfonamides', brand: 'Sultrik (Renata), Trim-Sul (ACI)' },
+                    { generic: 'Electrolytes & Vitamins (Supportive)', brand: 'Renalyte (Renata), Electromin (ACI)' }
+                ],
+                herbal: [
+                    'Garlic (Allium sativum) and Oregano extracts are sometimes used in feed for their natural antibacterial properties to support gut health.'
+                ],
+                prevention: [
+                    'Source ducklings only from Salmonella-free hatcheries.',
+                    'Strict biosecurity and hygiene at all times.',
+                    'Thorough cleaning and disinfection of brooders and houses.',
+                    'Strict rodent and wild bird control program.',
+                    'Use of probiotics and prebiotics to promote healthy gut flora.'
+                ]
+            },
+            /* --- POPULATED NEW ENTRIES --- */
+            'duck_viral_hepatitis': {
+                title: 'Duck Viral Hepatitis (DVH)',
+                signs: [
+                    'Sudden, high mortality in ducklings under 4 weeks old.',
+                    'Lethargy and loss of appetite.',
+                    'Spasms, and dying in an "opisthotonos" position (head arched back).',
+                    'Very short duration of illness (often less than a day).'
+                ],
+                postMortem: [
+                    'Enlarged liver, which is pale and covered with hemorrhages (petechial or ecchymotic).',
+                    'Enlarged and mottled spleen.',
+                    'Kidneys may be swollen.'
+                ],
+                treatment: [
+                    { generic: 'No specific antiviral treatment.', brand: 'N/A' },
+                    { generic: 'Anti-DVH serum (if available) can be given to affected ducklings.', brand: 'Consult Vet' },
+                    { generic: 'Electrolytes & Vitamins (Supportive)', brand: 'Renalyte (Renata), Electromin (ACI)' }
+                ],
+                herbal: [
+                    'Provide supportive care with clean water and high-quality feed.',
+                    'Herbal liver tonics may support recovery in mildly affected birds.'
+                ],
+                prevention: [
+                    'Vaccination of breeder ducks is the most effective prevention.',
+                    'Passive immunity is passed to ducklings.',
+                    'Strict biosecurity to prevent introduction of the virus.'
+                ]
+            },
+            'newcastle_disease': {
+                title: 'Newcastle Disease (ND)',
+                signs: [
+                    'Ducks are often resistant or show mild, subclinical signs.',
+                    'In some cases (with virulent strains): mild respiratory signs (coughing, sneezing).',
+                    'Nervous signs (tremors, paralysis of legs/wings, twisted neck).',
+                    'Greenish-white watery diarrhea.'
+                ],
+                postMortem: [
+                    'Often no gross lesions in ducks.',
+                    'In severe cases, hemorrhages in the proventriculus and intestines may be seen.',
+                    'Air sacculitis or congestion of trachea.'
+                ],
+                treatment: [
+                    { generic: 'No specific antiviral treatment.', brand: 'N/A' },
+                    { generic: 'Broad-spectrum antibiotics for secondary bacterial infections.', brand: 'e.g., Micronid Powder (Renata)' },
+                    { generic: 'Electrolytes & Vitamins (Supportive)', brand: 'Renalyte (Renata)' }
+                ],
+                herbal: [
+                    'Support immune system with Tulsi or Garlic in feed/water.'
+                ],
+                prevention: [
+                    'Vaccination is effective. Ducks may require a different schedule or adjuvant than chickens.',
+                    'Strict biosecurity, especially preventing contact with chickens or wild birds.'
+                ]
+            },
+            'duck_adenovirus': {
+                title: 'Duck Adenovirus Infection (Egg Drop Syndrome - EDS)',
+                signs: [
+                    'Primarily affects laying ducks.',
+                    'Significant drop in egg production (10-40%).',
+                    'Production of soft-shelled, thin-shelled, or shell-less eggs.',
+                    'Birds usually appear healthy otherwise.'
+                ],
+                postMortem: [
+                    'No specific gross lesions are typically seen.',
+                    'Atrophy of the oviduct or inflammation (salpingitis) may be present.'
+                ],
+                treatment: [
+                    { generic: 'No specific antiviral treatment.', brand: 'N/A' },
+                    { generic: 'Provide supportive care with multivitamins and minerals.', brand: 'e.g., Vitamix Plus (ACI)' }
+                ],
+                herbal: [
+                    'Supportive care to boost general health is all that can be done.'
+                ],
+                prevention: [
+                    'Vaccination of breeder flocks before the laying period.',
+                    'Strict biosecurity. The virus can be spread through contaminated eggs or equipment.'
+                ]
+            },
+            'colibacillosis': {
+                title: 'Colibacillosis (E. coli infection)',
+                signs: [
+                    'One of the most common bacterial diseases.',
+                    'Respiratory distress (coughing, sneezing).',
+                    'Lethargy, ruffled feathers, reduced appetite.',
+                    'Septicemia (blood infection) leading to sudden death.',
+                    'Diarrhea.'
+                ],
+                postMortem: [
+                    'Polyserositis: Fibrinous layers covering the heart (pericarditis), liver (perihepatitis), and air sacs (airsacculitis).',
+                    'Enlarged and congested liver and spleen.',
+                    'Enteritis (inflammation of the intestines).'
+                ],
+                treatment: [
+                    { generic: 'Amoxicillin', brand: 'Moxacil Vet (ACI)' },
+                    { generic: 'Enrofloxacin', brand: 'Enrocin (Renata), Baytril 10% (ACI)' },
+                    { generic: 'Potentiated Sulfonamides', brand: 'Sultrik (Renata), Trim-Sul (ACI)' },
+                    { generic: 'Doxycycline', brand: 'Doxy-A (ACI), Doxivet (Renata)'}
+                ],
+                herbal: [
+                    'Herbal extracts like oregano or garlic in feed can help support gut health and have antibacterial properties.'
+                ],
+                prevention: [
+                    'Good hygiene and sanitation in the brooder and house.',
+                    'Ensure clean drinking water (chlorination can help).',
+                    'Good ventilation to reduce respiratory stress.',
+                    'Control primary viral diseases that allow E. coli to invade.'
+                ]
+            },
+            'staphylococcosis': {
+                title: 'Staphylococcosis',
+                signs: [
+                    'Lameness, unwillingness to walk.',
+                    'Swollen hock joints or footpads (Bumblefoot).',
+                    'Depression and ruffled feathers.',
+                    'Can cause septicemia and sudden death.'
+                ],
+                postMortem: [
+                    'Fibrinopurulent arthritis (pus and fibrin in the joints).',
+                    'Abscesses in the footpad (Bumblefoot).',
+                    'Necrotic lesions or abscesses in the liver, spleen, or other organs.'
+                ],
+                treatment: [
+                    { generic: 'Erythromycin', brand: 'Micronid Powder (Renata)' },
+                    { generic: 'Amoxicillin', brand: 'Moxacil Vet (ACI)' },
+                    { generic: 'Isolate affected birds. Lancing and cleaning abscesses (by a vet).', brand: 'N/A' }
+                ],
+                herbal: [
+                    'Application of a turmeric (holud) and neem paste on external wounds or bumblefoot can have antiseptic effects.'
+                ],
+                prevention: [
+                    'Maintain clean, dry litter to prevent footpad injuries.',
+                    'Remove sharp objects from the environment.',
+                    'Good sanitation to reduce bacterial load.'
+                ]
+            },
+            'helminthiasis': {
+                title: 'Helminthiasis (Worms)',
+                signs: [
+                    'Poor growth, weight loss, and emaciation despite good appetite.',
+                    'Lethargy and depression.',
+                    'Diarrhea (sometimes bloody).',
+                    'Anemia (pale beaks and legs).',
+                    'Visible worms in droppings (in heavy infections).'
+                ],
+                postMortem: [
+                    'Visible roundworms, tapeworms, or flukes in the intestines, ceca, or trachea.',
+                    'Enteritis (inflammation) or blockage of the intestine.'
+                ],
+                treatment: [
+                    { generic: 'Albendazole', brand: 'Alben (Renata), Albendazole (ACI)' },
+                    { generic: 'Levamisole', brand: 'Levavet (Renata), Levamisole (ACI)' },
+                    { generic: 'Praziquantel (for flukes/tapes)', brand: 'Consult Vet' }
+                ],
+                herbal: [
+                    'Papaya seeds and pumpkin seeds are traditionally used as natural dewormers, but their effectiveness is variable.'
+                ],
+                prevention: [
+                    'Regular deworming program, especially for scavenging ducks.',
+                    'Good litter management.',
+                    'Control of intermediate hosts like snails (for flukes) and insects.'
+                ]
+            },
+            'ectoparasites': {
+                title: 'Ectoparasites (Lice, Mites)',
+                signs: [
+                    'Restlessness, irritation, and excessive preening or feather pecking.',
+                    'Visible lice or mites, especially around the vent, wings, and head.',
+                    'Feather damage and loss.',
+                    'Anemia, weakness, and reduced egg production in severe cases.'
+                ],
+                postMortem: [
+                    'N/A (Diagnosed on live birds). Body may be emaciated and pale from anemia.'
+                ],
+                treatment: [
+                    { generic: 'Ivermectin (systemic)', brand: 'Ivermec (Renata), Ivermectin (ACI)' },
+                    { generic: 'Cypermethrin (spray on premises)', brand: 'Ecto-Nil (ACI), Varies' },
+                    { generic: 'Medicated dust baths.', brand: 'N/A' }
+                ],
+                herbal: [
+                    'Providing dust baths with wood ash and sulfur is a traditional prevention method.'
+                ],
+                prevention: [
+                    'Clean and disinfect housing regularly.',
+                    'Quarantine new birds before introducing them to the flock.',
+                    'Provide areas for dust bathing.'
+                ]
+            },
+            'candidiasis': {
+                title: 'Candidiasis (Candida albicans)',
+                signs: [
+                    'Also known as "Thrush" or "Sour Crop".',
+                    'White, cheesy, or necrotic plaques in the mouth, esophagus, and crop.',
+                    'Poor growth, lethargy, and ruffled feathers.',
+                    'Crop may be distended and fail to empty.'
+                ],
+                postMortem: [
+                    'Characteristic "Turkish towel" appearance of the crop lining (raised, white, and plaque-covered).',
+                    'Lesions may extend into the esophagus and proventriculus.'
+                ],
+                treatment: [
+                    { generic: 'Nystatin (antifungal)', brand: 'Consult Vet for Nystatin source' },
+                    { generic: 'Copper Sulfate in drinking water (use with caution).', brand: 'Varies' }
+                ],
+                herbal: [
+                    'Using apple cider vinegar in the water (1-2 ml per liter) can help make the crop environment less favorable for Candida.'
+                ],
+                prevention: [
+                    'Avoid using moldy feed or litter.',
+                    'Clean waterers and feeders daily.',
+                    'Avoid overuse of antibiotics, which can disrupt normal gut flora and allow yeast to overgrow.'
+                ]
+            },
+            'niacin_deficiency': {
+                title: 'Niacin (Vitamin B3) Deficiency',
+                signs: [
+                    'Most common nutritional deficiency in ducklings.',
+                    'Bowed legs and enlarged hock joints.',
+                    '"Spraddled legs" - ducklings are unable to stand or walk properly.',
+                    'Poor growth and feathering.'
+                ],
+                postMortem: [
+                    'No specific internal lesions. Diagnosis is based on clinical signs and response to treatment.'
+                ],
+                treatment: [
+                    { generic: 'Niacin (Vitamin B3) supplementation in water.', brand: 'Rena-B (Renata), Vitamix Plus (ACI)' },
+                    { generic: 'Provide feed specifically formulated for ducks (not chickens).', brand: 'N/A' }
+                ],
+                herbal: [
+                    'Supplement feed with Brewer\'s Yeast, which is a rich natural source of Niacin.'
+                ],
+                prevention: [
+                    'Ensure the duck starter feed contains adequate levels of Niacin (ducklings require more than chicks).',
+                    'Supplement feed with Niacin or Brewer\'s Yeast.'
+                ]
+            },
+            'vitamin_a_deficiency': {
+                title: 'Vitamin A Deficiency',
+                signs: [
+                    'Poor growth, weakness, and ruffled feathers.',
+                    'Nasal and ocular (eye) discharge.',
+                    'Swollen eyes, sometimes with cheesy exudate (mistaken for infection).',
+                    'Incoordination and nervous signs.'
+                ],
+                postMortem: [
+                    'White pustules or nodules in the esophagus, pharynx, and mouth.',
+                    'Kidneys may be pale and swollen with urate deposits.'
+                ],
+                treatment: [
+                    { generic: 'Vitamin A supplementation (in water or feed).', brand: 'Rena-AD3E (Renata), Vitamix Plus (ACI)' }
+                ],
+                herbal: [
+                    'Provide fresh green leafy vegetables (like spinach or moringa leaves) if birds are accustomed to them.'
+                ],
+                prevention: [
+                    'Use high-quality, fresh feed. Vitamin A degrades over time in storage.',
+                    'Ensure feed is properly fortified with Vitamin A.'
+                ]
+            },
+            'rickets': {
+                title: 'Rickets',
+                signs: [
+                    'Lameness, stiffness, and unwillingness to move.',
+                    'Softening of the bones, especially the beak and leg bones.',
+                    'Bones may be bent or deformed.',
+                    'Poor growth and feathering.'
+                ],
+                postMortem: [
+                    'Bones are soft, rubbery, and easily cut.',
+                    '"Beaded ribs" - enlargement at the junction of the ribs and cartilage.',
+                    'Beak can be easily flexed.'
+                ],
+                treatment: [
+                    { generic: 'Vitamin D3 Supplementation', brand: 'Rena-AD3E (Renata)' },
+                    { generic: 'Calcium & Phosphorus Supplementation', brand: 'Rena-Cal P (Renata), Cal-P (ACI)' }
+                ],
+                herbal: [
+                    'Ensure adequate (but not excessive) calcium sources like oyster shell grit are available to layers.'
+                ],
+                prevention: [
+                    'Provide a diet with the correct balance of Calcium, Phosphorus, and Vitamin D3.',
+                    'Ensure feed is fresh as Vitamin D3 can degrade.'
+                ]
+            }
+        };
+
+        // Define categories for the dropdown
+        const diseaseCategories = [
+            { 
+                name: 'Viral Diseases', 
+                keys: ['duck_plague', 'duck_viral_hepatitis', 'avian_influenza', 'newcastle_disease', 'duck_adenovirus'] 
+            },
+            { 
+                name: 'Bacterial Diseases', 
+                keys: ['duck_cholera', 'colibacillosis', 'salmonellosis', 'riemerella', 'botulism', 'staphylococcosis', 'mycoplasmosis'] 
+            },
+            {
+                name: 'Parasitic Diseases',
+                keys: ['coccidiosis', 'helminthiasis', 'ectoparasites']
+            },
+            {
+                name: 'Fungal Diseases',
+                keys: ['aspergillosis', 'candidiasis']
+            },
+            { 
+                name: 'Nutritional & Managemental', 
+                keys: ['niacin_deficiency', 'vitamin_a_deficiency', 'rickets', 'aflatoxicosis']
+            }
+        ];
+
+
+        // --- SCRIPT LOGIC ---
+        document.addEventListener('DOMContentLoaded', () => {
+            const selectNav = document.getElementById('disease-select-nav');
+            const welcomeMessage = document.getElementById('welcome-message');
+            const diseaseDetail = document.getElementById('disease-detail');
+            
+            // Get content placeholders
+            const titleEl = document.getElementById('disease-title');
+            const signsEl = document.getElementById('disease-signs');
+            const postMortemEl = document.getElementById('disease-postMortem');
+            const preventionEl = document.getElementById('disease-prevention');
+            const herbalEl = document.getElementById('disease-herbal');
+            const treatmentTbody = document.getElementById('disease-treatment').querySelector('tbody');
+
+
+            // 1. Populate dropdown navigation with categories
+            diseaseCategories.forEach(category => {
+                const optgroup = document.createElement('optgroup');
+                optgroup.label = category.name;
+                
+                category.keys.forEach(key => {
+                    const disease = diseaseData[key];
+                    if (disease) {
+                        const option = document.createElement('option');
+                        option.textContent = disease.title;
+                        option.value = key;
+                        optgroup.appendChild(option);
+                    }
+                });
+                
+                selectNav.appendChild(optgroup);
+            });
+
+            // 2. Helper function to populate a list
+            function populateList(ulElement, items) {
+                ulElement.innerHTML = '';
+                if (!items || items.length === 0) {
+                     ulElement.innerHTML = '<li>No specific information listed.</li>';
+                     return;
+                }
+                items.forEach(item => {
+                    const li = document.createElement('li');
+                    li.textContent = item;
+                    ulElement.appendChild(li);
+                });
+            }
+
+            // 3. Helper function to populate the treatment table
+            function populateTreatmentTable(tbody, treatments) {
+                tbody.innerHTML = '';
+                if (!treatments || treatments.length === 0) {
+                    tbody.innerHTML = '<tr><td colspan="2" class="px-6 py-4 text-stone-500">No specific drug treatment available.</td></tr>';
+                    return;
+                }
+                treatments.forEach(treat => {
+                    const tr = document.createElement('tr');
+                    // Add alternating row colors
+                    tr.className = 'even:bg-stone-50';
+                    tr.innerHTML = `
+                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-stone-800">${treat.generic}</td>
+                        <td class="px-6 py-4 whitespace-nowGrap text-sm text-stone-600">${treat.brand}</td>
+                    `;
+                    tbody.appendChild(tr);
+                });
+            }
+            
+            // 4. Helper function to display disease data
+            function displayDisease(diseaseKey) {
+                const data = diseaseData[diseaseKey];
+                if (!data) return;
+
+                // Hide welcome, show details
+                welcomeMessage.classList.add('hidden');
+                diseaseDetail.classList.remove('hidden');
+
+                // Populate content
+                titleEl.textContent = data.title;
+                populateList(signsEl, data.signs);
+                populateList(postMortemEl, data.postMortem);
+                populateList(preventionEl, data.prevention);
+                populateList(herbalEl, data.herbal);
+                populateTreatmentTable(treatmentTbody, data.treatment);
+                
+                // Scroll to top of content area
+                document.querySelector('.main-content-scroll').scrollTop = 0;
+            }
+
+            // 5. Add change listener to the dropdown
+            selectNav.addEventListener('change', (e) => {
+                const diseaseKey = e.target.value;
+                if (diseaseKey) {
+                    displayDisease(diseaseKey);
+                } else {
+                    // If they select the placeholder, show welcome
+                    welcomeMessage.classList.remove('hidden');
+                    diseaseDetail.classList.add('hidden');
+                }
+            });
+            
+            // 6. Correct typo in coccidiosis prevention
+            if (diseaseData.coccidiosis && diseaseData.coccidiosis.prevention) {
+                const prevention = diseaseData.coccidiosis.prevention;
+                const typoIndex = prevention.findIndex(item => item.includes('cocciodiostat'));
+                if (typoIndex > -1) {
+                    prevention[typoIndex] = prevention[typoIndex].replace('cocciodiostat', 'coccidiostat');
+                }
+            }
+
+            // 7. Correct typo in botulism signs
+            if (diseaseData.botulism && diseaseData.botulism.signs) {
+                const signs = diseaseData.botulism.signs;
+                const typoIndex = signs.findIndex(item => item.includes('flacid'));
+                if (typoIndex > -1) {
+                    signs[typoIndex] = signs[typoIndex].replace('flacid', 'flaccid');
+                }
+            }
+        });
+    </script>
+
+</body>
+</html>
+
